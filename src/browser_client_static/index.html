@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cliente do Servidor Web</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <h1>Cliente do Servidor Web</h1>
+
+    <form class="toolbar" id="request-form">
+      <label>
+        Host
+        <input id="host" name="host" value="__TARGET_HOST__" autocomplete="off">
+      </label>
+      <label>
+        Porta
+        <input id="port" name="port" value="__TARGET_PORT__" inputmode="numeric" autocomplete="off">
+      </label>
+      <label>
+        Arquivo
+        <input id="path" name="path" value="/" autocomplete="off">
+      </label>
+      <button id="submit" type="submit">Buscar</button>
+    </form>
+
+    <div class="status">
+      <div class="metric" id="status-box">
+        <span>Status</span>
+        <strong id="status">Aguardando</strong>
+      </div>
+      <div class="metric">
+        <span>Tipo</span>
+        <strong id="content-type">-</strong>
+      </div>
+      <div class="metric">
+        <span>Tamanho</span>
+        <strong id="content-length">-</strong>
+      </div>
+    </div>
+
+    <div class="content">
+      <section>
+        <header>Corpo da resposta</header>
+        <pre id="body"></pre>
+      </section>
+      <section>
+        <header>Previa HTML</header>
+        <div class="empty" id="empty-preview">Solicite `/` ou `/index.html` para renderizar HTML aqui.</div>
+        <iframe id="html-preview" title="Previa HTML" sandbox hidden></iframe>
+      </section>
+    </div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
