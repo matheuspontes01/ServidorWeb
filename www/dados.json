@@ -1,0 +1,6 @@
+{
+  "projeto": "Servidor Web Simplificado",
+  "linguagem": "Python",
+  "protocolo": "TCP",
+  "porta": 8080
+}
