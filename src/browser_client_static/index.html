@@ -7,23 +7,37 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <main>
-    <h1>Cliente do Servidor Web</h1>
+  <main class="page-container">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Cliente TCP</p>
+        <h1>Cliente do Servidor Web</h1>
+        <p class="subtitle">Informe o recurso desejado para visualizar a resposta enviada pelo servidor.</p>
+      </div>
+
+      <div class="server-badge">
+        <span class="server-dot"></span>
+        Interface ativa
+      </div>
+    </header>
 
     <form class="toolbar" id="request-form">
       <label>
         Host
         <input id="host" name="host" value="__TARGET_HOST__" autocomplete="off">
       </label>
+
       <label>
         Porta
         <input id="port" name="port" value="__TARGET_PORT__" inputmode="numeric" autocomplete="off">
       </label>
+
       <label>
-        Arquivo
+        Arquivo solicitado
         <input id="path" name="path" value="/" autocomplete="off">
       </label>
-      <button id="submit" type="submit">Buscar</button>
+
+      <button id="submit" type="submit">Buscar recurso</button>
     </form>
 
     <div class="status">
@@ -31,10 +45,12 @@
         <span>Status</span>
         <strong id="status">Aguardando</strong>
       </div>
+
       <div class="metric">
-        <span>Tipo</span>
+        <span>Tipo do conteúdo</span>
         <strong id="content-type">-</strong>
       </div>
+
       <div class="metric">
         <span>Tamanho</span>
         <strong id="content-length">-</strong>
@@ -42,14 +58,23 @@
     </div>
 
     <div class="content">
-      <section>
-        <header>Corpo da resposta</header>
+      <section class="response-panel">
+        <header>
+          <span>Corpo da resposta</span>
+          <small>Conteúdo bruto</small>
+        </header>
         <pre id="body"></pre>
       </section>
-      <section>
-        <header>Previa HTML</header>
-        <div class="empty" id="empty-preview">Solicite `/` ou `/index.html` para renderizar HTML aqui.</div>
-        <iframe id="html-preview" title="Previa HTML" sandbox hidden></iframe>
+
+      <section class="response-panel">
+        <header>
+          <span>Prévia HTML</span>
+          <small>Renderização visual</small>
+        </header>
+        <div class="empty" id="empty-preview">
+          Solicite <code>/</code> ou <code>/index.html</code> para visualizar a página.
+        </div>
+        <iframe id="html-preview" title="Prévia HTML" sandbox hidden></iframe>
       </section>
     </div>
   </main>

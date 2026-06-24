@@ -2,10 +2,245 @@
 <html lang="pt-br">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Servidor Web Simplificado</title>
+
+  <style>
+    :root {
+      --background: #0f172a;
+      --surface: #172033;
+      --surface-light: #1e293b;
+      --primary: #38bdf8;
+      --primary-dark: #0284c7;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --success: #22c55e;
+      --border: rgba(148, 163, 184, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top right, rgba(56, 189, 248, 0.18), transparent 32%),
+        var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1050px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.88);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+    }
+
+    .logo {
+      color: var(--text);
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      border: 1px solid rgba(34, 197, 94, 0.35);
+      border-radius: 999px;
+      color: #bbf7d0;
+      background: rgba(34, 197, 94, 0.1);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+    }
+
+    .hero {
+      padding: 80px 0 54px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 auto 18px;
+      font-size: clamp(36px, 7vw, 64px);
+      line-height: 1.05;
+    }
+
+    .hero-description {
+      max-width: 680px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      padding-bottom: 42px;
+    }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, var(--surface), var(--surface-light));
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+    }
+
+    .card-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      place-items: center;
+      border-radius: 12px;
+      color: #082f49;
+      background: var(--primary);
+      font-weight: 800;
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .request-box {
+      margin-bottom: 60px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(23, 32, 51, 0.78);
+    }
+
+    .request-box h2 {
+      margin: 0 0 15px;
+      font-size: 21px;
+    }
+
+    code {
+      display: block;
+      padding: 16px;
+      overflow-x: auto;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      color: #bae6fd;
+      background: #020617;
+      font-family: Consolas, Monaco, monospace;
+    }
+
+    footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 58px;
+      }
+
+      .navbar {
+        gap: 14px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Servidor Web Simplificado</h1>
-  <p>Esta e a pagina inicial servida pelo projeto.</p>
+  <header>
+    <div class="container navbar">
+      <a class="logo" href="#">WebServer</a>
+
+      <div class="status">
+        <span class="status-dot"></span>
+        Servidor ativo
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">Aplicação cliente-servidor</p>
+      <h1>Servidor Web Simplificado</h1>
+      <p class="hero-description">
+        Projeto desenvolvido com sockets TCP e threads para atender vários clientes
+        de forma simultânea.
+      </p>
+    </section>
+
+    <section class="cards" aria-label="Características do servidor">
+      <article class="card">
+        <div class="card-number">01</div>
+        <h2>Comunicação TCP</h2>
+        <p>O cliente envia uma solicitação e recebe o conteúdo solicitado pelo servidor.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-number">02</div>
+        <h2>Múltiplos clientes</h2>
+        <p>Cada conexão é atendida em uma thread independente no servidor.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-number">03</div>
+        <h2>Arquivos da pasta WWW</h2>
+        <p>Os recursos disponíveis são localizados e enviados a partir da pasta pública.</p>
+      </article>
+    </section>
+
+    <section class="request-box">
+      <h2>Exemplo de requisição</h2>
+      <code>GET /index.html</code>
+    </section>
+  </main>
+
+  <footer>
+    Servidor Web Simplificado — Trabalho de Redes de Computadores
+  </footer>
 </body>
 </html>
