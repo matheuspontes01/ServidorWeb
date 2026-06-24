@@ -66,6 +66,8 @@ def handle_client(client_socket: socket.socket, address: tuple[str, int]) -> Non
             client_socket.settimeout(10)
             data = client_socket.recv(4096)
             request_line = data.decode("utf-8", errors="replace").splitlines()[0] if data else ""
+            thread_name = threading.current_thread().name
+            print(f"[{thread_name}] Cliente {address[0]}:{address[1]} solicitou: {request_line or '<vazio>'}")
             response = build_response(request_line)
 
             header = (
